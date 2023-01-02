@@ -1,0 +1,12 @@
+.taiwan-map {
+  width: 700px;
+}
+
+.taiwan-map svg path {
+  fill: #BBD1EA;
+  stroke: #04080F;
+}
+
+.taiwan-map svg path:hover {
+  fill: #507DBC;
+}
