@@ -31,14 +31,17 @@ class TemperatureMapColorizer {
       const avg = (Number(loc.min) + Number(loc.max)) / 2
       const color = this.getColor(avg)
       this.twMap.changeColor(loc.name, color, hoverColor)
+      this.twMap.setPalette(loc.name, color, hoverColor)
     }
   }
 
   setTooltip = () => {
     this.twMap.onmouseenter = (_, location) => {
       const loc = this.locations.filter(m => m.name === location)[0]
-      const avg = (Number(loc.min) + Number(loc.max)) / 2
-      this.twMap.setTooltip(`${loc.name} 溫度 ${avg} 度`);
+      if (loc) {
+        const avg = (Number(loc.min) + Number(loc.max)) / 2
+        this.twMap.setTooltip(`${loc.name} 溫度 ${avg} 度`);
+      }
     }
     this.twMap.onmouseleave = () => {
       this.twMap.resetTooltip();
@@ -92,13 +95,16 @@ class RelativeHumidityColorizer {
     for (const loc of this.locations) {
       const color = this.getColor(loc.RH)
       this.twMap.changeColor(loc.name, color, hoverColor)
+      this.twMap.setPalette(loc.name, color, hoverColor)
     }
   }
 
   setTooltip = () => {
     this.twMap.onmouseenter = (_, location) => {
       const loc = this.locations.filter(m => m.name === location)[0]
-      this.twMap.setTooltip(`${loc.name} 相對溼度 ${loc.RH}%`);
+      if (loc) {
+        this.twMap.setTooltip(`${loc.name} 相對溼度 ${loc.RH}%`);
+      }
     }
     this.twMap.onmouseleave = () => {
       this.twMap.resetTooltip();

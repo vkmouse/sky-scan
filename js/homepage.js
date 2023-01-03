@@ -1,4 +1,5 @@
 import TaiwanMap from "./taiwan_map.js";
+import { setup as setupColorizer } from "./colorizer.js";
 
 
 const root = document.getElementsByClassName("root")[0];
@@ -13,7 +14,7 @@ const temperature = document.querySelectorAll(".temperature");
 let locationArr = null;
 let prevClickedLocation;
 
-
+setupColorizer(twMap);
 
 
 fetch(url)
@@ -32,8 +33,8 @@ fetch(url)
 
 twMap.onclick = (twMap, location) => {
     locationName.innerHTML = location;
+    twMap.resetColor(location)
     twMap.changeColor(location, "#197ac9",);
-    twMap.changeColor(prevClickedLocation, "#BBD1EA");
     prevClickedLocation = location;
     locationArr.forEach(element => {
         if (element.locationName === location) {
