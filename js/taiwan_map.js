@@ -1,110 +1,64 @@
 // --- Usage ---
 // const root = document.getElementsByClassName("root")[0]
-// const twMap = new TaiwanMap(root);
-// twMap.onclick = (twMap, location) => {
-//   console.log(location);
-//   twMap.changeColor(location, "red", "blue");
-// };
+// new TaiwanMap(root, (region) => {
+//   alert(region)
+// })
 
 class TaiwanMap {
 
-  /** (mapContainer: HTMLElement) */
-  constructor(mapContainer) {
-    this.mapContainer = mapContainer
-    this.mapContainer.innerHTML = mapHTML
-    this.initEvent()
-    this.initTooltip()
-  }
-
-  initEvent = () => {
-    for (const { location, id } of locations) {
-      document.getElementById(id).onclick = () =>
-        this.onclick(this, location)
-      document.getElementById(id).onmouseenter = () =>
-        this.onmouseenter(this, location)
-      document.getElementById(id).onmouseleave = () =>
-        this.onmouseleave(this, location)
-    }
-  }
-
-  initTooltip = () => {
-   const element = document.getElementsByClassName("taiwan-map-tooltip")[0] 
-   for (const { id } of locations) {
-      document.getElementById(id).onmousemove = (e) => {
-        const { offsetX, offsetY } = e
-        if (this.tooltip) {
-          element.textContent = this.tooltip           
-          element.style.display = "block";
-          element.style.left = `${offsetX + 20}px`;
-          element.style.top = `${offsetY + 20}px`;
-        }
+   /** (mapContainer: HTMLElement) */
+   constructor(mapContainer) {
+      this.mapContainer = mapContainer
+      this.mapContainer.innerHTML = mapHTML
+      for (const { location, id } of locations) {
+         document.getElementById(id).onclick = () =>
+            this.onclick(this, location)
       }
-      document.getElementById(id).onmouseleave = (e) => {
-        element.style.display = "none";
+   }
+
+   /** (twMap: TaiwanMap, location: string) => void */
+   onclick = (twMap, location) => void 0
+
+   /** (location: string, color: string) => void */
+   changeColor = (location, color) => {
+      const res = locations.filter(loc => loc.location === location)
+      if (res.length > 0) {
+         const group = document.getElementById(res[0].id)
+         const path = group.getElementsByTagName("path")[0]
+         path.style.fill = color
+      } else {
+         console.log("Error: Unable to change color. No location specified.")
       }
-    }
-  }
-
-  /** (twMap: TaiwanMap, location: string) => void */
-  onclick = (twMap, location) => void 0
-  onmouseenter = (twMap, location) => void 0
-  onmouseleave = (twMap, location) => void 0
-
-  /** (location: string, color: string, hoverColor: string) => void */
-  changeColor = (location, color, hoverColor) => {
-    const res = locations.filter(loc => loc.location === location.replace("臺", "台"))
-    if (res.length > 0) {
-      const group = document.getElementById(res[0].id)
-      const path = group.getElementsByTagName("path")[0]
-      path.addEventListener('mouseover', () => {
-         path.style.fill = hoverColor;
-      });
-      path.addEventListener('mouseout', () => {
-         path.style.fill = color;
-      });
-      path.style.fill = color;
-    } else {
-      console.log("Error: Unable to change color. No location specified.")
-    }
-  }
-
-  setTooltip = (value) => {
-    this.tooltip = value
-  }
-
-  clearTooltip = () => {
-    this.tooltip = null
-  }
+   }
 }
 
 const locations = [
-  { id: "C10017", location: "基隆市" },
-  { id: "C65", location: "新北市" },
-  { id: "C63", location: "台北市" },
-  { id: "C68", location: "桃園市" },
-  { id: "C10004", location: "新竹縣" },
-  { id: "C10018", location: "新竹市" },
-  { id: "C10005", location: "苗栗縣" },
-  { id: "C66", location: "台中市" },
-  { id: "C10008", location: "南投縣" },
-  { id: "C10007", location: "彰化縣" },
-  { id: "C10009", location: "雲林縣" },
-  { id: "C10010", location: "嘉義縣" },
-  { id: "C10020", location: "嘉義市" },
-  { id: "C67", location: "台南市" },
-  { id: "C64", location: "高雄市" },
-  { id: "C10013", location: "屏東縣" },
-  { id: "C10014", location: "台東縣" },
-  { id: "C10015", location: "花蓮縣" },
-  { id: "C10002", location: "宜蘭縣" },
-  { id: "C10016", location: "澎湖縣" },
-  { id: "C09020", location: "金門縣" },
-  { id: "C09007", location: "連江縣" },
+   { id: "C10017", location: "基隆市" },
+   { id: "C65", location: "新北市" },
+   { id: "C63", location: "台北市" },
+   { id: "C68", location: "桃園市" },
+   { id: "C10004", location: "新竹縣" },
+   { id: "C10018", location: "新竹市" },
+   { id: "C10005", location: "苗栗縣" },
+   { id: "C66", location: "台中市" },
+   { id: "C10008", location: "南投縣" },
+   { id: "C10007", location: "彰化縣" },
+   { id: "C10009", location: "雲林縣" },
+   { id: "C10010", location: "嘉義縣" },
+   { id: "C10020", location: "嘉義市" },
+   { id: "C67", location: "台南市" },
+   { id: "C64", location: "高雄市" },
+   { id: "C10013", location: "屏東縣" },
+   { id: "C10014", location: "台東縣" },
+   { id: "C10015", location: "花蓮縣" },
+   { id: "C10002", location: "宜蘭縣" },
+   { id: "C10016", location: "澎湖縣" },
+   { id: "C09020", location: "金門縣" },
+   { id: "C09007", location: "連江縣" },
 ]
 
 const mapHTML = `
   <div class="taiwan-map">
-    <div class="taiwan-map-tooltip"></div>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 535" style="enable-background:new 0 0 400 535" xml:space="preserve" fill="white" class=" drawsvg-initialized ">
      <!-- ======================= 基隆市  ======================= -->
      <g id="C10017">

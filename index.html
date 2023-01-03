@@ -22,29 +22,62 @@
     </div>
     <div class="container">
       <div class="left-content">
-        <p class="location"></p>
-        <div class="weather-status">
+        <p class="location">台北市</p>
+        <div class="weather-status-content">
           <div class="today-morning-weather">
-            <p>今日白天</p>
+            <p class="weather-status-title">今日白天</p>
             <p>06:00 ~ 18:00</p>
+            <p class="weather-status"></p>
+            <img class="weather-status-image"/>
+            <p class="temperature"></p>
+            <div class="probability-of-precipitation">
+              <img class="umbrella-image" src="images/umbrella.png"/>
+              <p class="probability-of-precipitation-font"></p>
+            </div>
           </div>
           <div class="today-night-weather">
-            <p>今晚明晨</p>
+            <p class="weather-status-title">今晚明晨</p>
             <p>18:00 ~ 06:00</p>
+            <p class="weather-status"></p>
+            <img class="weather-status-image"/>
+            <p class="temperature"></p>
+            <div class="probability-of-precipitation">
+              <img class="umbrella-image" src="images/umbrella.png"/>
+              <p class="probability-of-precipitation-font"></p>
+            </div>
           </div>
           <div class="tomorrow-morning-weather">
-            <p>明天白天</p>
+            <p class="weather-status-title">明天白天</p>
             <p>06:00 ~ 18:00</p>
+            <p class="weather-status"> </p>
+            <img class="weather-status-image"/>
+            <p class="temperature"></p>
+            <div class="probability-of-precipitation">
+              <img class="umbrella-image" src="images/umbrella.png"/>
+              <p class="probability-of-precipitation-font"></p>
+            </div>
           </div>
-        </div>  
+        </div>
+        
+        <div class="town-info-btn">
+          <p >鄉鎮預報總覽</p>
+          <img src="images/right-arrow.png"/>
+        </div>
+        <div class="week-weather-btn">
+          <p>一周天氣預報</p>
+          <img src="images/right-arrow.png"/>
+        </div>
+
       </div>
 
       <div class="root"></div>
     </div>
     <script>
       const config = {
-        API_KEY: "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5"
+        API_KEY: "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5",
+        Authorization_Key:"CWB-E09A0AE9-71E8-4ABE-95D4-048AF8BCD5B1"
       }
+      
     </script>
   </body>
 </html>

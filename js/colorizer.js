@@ -119,7 +119,7 @@ class RelativeHumidityColorizer {
 
   getColor = (value) => {
     const colorMap = [
-      "#AE6E38", "#AE9238", "#69AE38", "#36AF94", "#38AEEA", 
+      "#AE6E38", "#AE9238", "#69AE38", "#36AF94", "#38AEEA",
       "#3886AE", "#3885AE", "#3871A6", "#384774"
     ]
     if (value < 0) {
