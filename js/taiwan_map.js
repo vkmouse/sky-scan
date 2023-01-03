@@ -1,8 +1,10 @@
 // --- Usage ---
 // const root = document.getElementsByClassName("root")[0]
-// new TaiwanMap(root, (region) => {
-//   alert(region)
-// })
+// const twMap = new TaiwanMap(root);
+// twMap.onclick = (twMap, location) => {
+//   console.log(location);
+//   twMap.changeColor(location, "red", "blue");
+// };
 
 class TaiwanMap {
 
@@ -10,25 +12,68 @@ class TaiwanMap {
   constructor(mapContainer) {
     this.mapContainer = mapContainer
     this.mapContainer.innerHTML = mapHTML
+    this.initEvent()
+    this.initTooltip()
+  }
+
+  initEvent = () => {
     for (const { location, id } of locations) {
       document.getElementById(id).onclick = () =>
         this.onclick(this, location)
+      document.getElementById(id).onmouseenter = () =>
+        this.onmouseenter(this, location)
+      document.getElementById(id).onmouseleave = () =>
+        this.onmouseleave(this, location)
+    }
+  }
+
+  initTooltip = () => {
+   const element = document.getElementsByClassName("taiwan-map-tooltip")[0] 
+   for (const { id } of locations) {
+      document.getElementById(id).onmousemove = (e) => {
+        const { offsetX, offsetY } = e
+        if (this.tooltip) {
+          element.textContent = this.tooltip           
+          element.style.display = "block";
+          element.style.left = `${offsetX + 20}px`;
+          element.style.top = `${offsetY + 20}px`;
+        }
+      }
+      document.getElementById(id).onmouseleave = (e) => {
+        element.style.display = "none";
+      }
     }
   }
 
   /** (twMap: TaiwanMap, location: string) => void */
   onclick = (twMap, location) => void 0
+  onmouseenter = (twMap, location) => void 0
+  onmouseleave = (twMap, location) => void 0
 
-  /** (location: string, color: string) => void */
-  changeColor = (location, color) => {
-    const res = locations.filter(loc => loc.location === location)
+  /** (location: string, color: string, hoverColor: string) => void */
+  changeColor = (location, color, hoverColor) => {
+    const res = locations.filter(loc => loc.location === location.replace("臺", "台"))
     if (res.length > 0) {
       const group = document.getElementById(res[0].id)
       const path = group.getElementsByTagName("path")[0]
-      path.style.fill = color
+      path.addEventListener('mouseover', () => {
+         path.style.fill = hoverColor;
+      });
+      path.addEventListener('mouseout', () => {
+         path.style.fill = color;
+      });
+      path.style.fill = color;
     } else {
       console.log("Error: Unable to change color. No location specified.")
     }
+  }
+
+  setTooltip = (value) => {
+    this.tooltip = value
+  }
+
+  clearTooltip = () => {
+    this.tooltip = null
   }
 }
 
@@ -59,6 +104,7 @@ const locations = [
 
 const mapHTML = `
   <div class="taiwan-map">
+    <div class="taiwan-map-tooltip"></div>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 535" style="enable-background:new 0 0 400 535" xml:space="preserve" fill="white" class=" drawsvg-initialized ">
      <!-- ======================= 基隆市  ======================= -->
      <g id="C10017">
