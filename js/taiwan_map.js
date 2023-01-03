@@ -1,8 +1,10 @@
 // --- Usage ---
 // const root = document.getElementsByClassName("root")[0]
-// new TaiwanMap(root, (region) => {
-//   alert(region)
-// })
+// const twMap = new TaiwanMap(root);
+// twMap.onclick = (twMap, location) => {
+//   console.log(location);
+//   twMap.changeColor(location, "red", "blue");
+// };
 
 class TaiwanMap {
 
@@ -19,13 +21,19 @@ class TaiwanMap {
   /** (twMap: TaiwanMap, location: string) => void */
   onclick = (twMap, location) => void 0
 
-  /** (location: string, color: string) => void */
-  changeColor = (location, color) => {
-    const res = locations.filter(loc => loc.location === location)
+  /** (location: string, color: string, hoverColor: string) => void */
+  changeColor = (location, color, hoverColor) => {
+    const res = locations.filter(loc => loc.location === location.replace("臺", "台"))
     if (res.length > 0) {
       const group = document.getElementById(res[0].id)
       const path = group.getElementsByTagName("path")[0]
-      path.style.fill = color
+      path.addEventListener('mouseover', () => {
+         path.style.fill = hoverColor;
+      });
+      path.addEventListener('mouseout', () => {
+         path.style.fill = color;
+      });
+      path.style.fill = color;
     } else {
       console.log("Error: Unable to change color. No location specified.")
     }

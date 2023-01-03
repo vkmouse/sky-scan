@@ -1,0 +1,35 @@
+body {
+  margin: 0px;
+}
+
+.colorizer-container {
+  position: fixed;
+  width: 32px;
+  height: 100vh;
+  left: calc(100% - 32px);
+  user-select: none;
+}
+
+.colorizer-menu {
+  width: 32px;
+  margin-top: 16px;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.colorizer-menu-item {
+  padding: 3px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.colorizer-menu-item:hover {
+  background-color: #ddd;
+}
+
+.colorizer-menu-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: none;
+  object-position: center;
+}
