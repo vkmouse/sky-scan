@@ -1,4 +1,5 @@
 .taiwan-map {
+  position: relative;
   width: 600px;
   margin-top: 100px;
 }
@@ -10,4 +11,14 @@
 
 .taiwan-map svg path:hover {
   fill: #507DBC;
+}
+
+.taiwan-map-tooltip {
+  position: absolute;
+  white-space: nowrap;
+  display: none;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid black;
 }
