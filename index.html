@@ -6,10 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/taiwan_map.css">
     <link rel="stylesheet" href="style/homepage.css">
+    <link rel="stylesheet" href="style/colorizer.css">
     <title>Sky Scan</title>
   </head>
   <body>
-
+    <div class="colorizer-container">
+      <div class="colorizer-menu">
+        <div id="temperature-colorizer" class="colorizer-menu-item">
+          <img class="colorizer-menu-icon" src="https://img.icons8.com/external-kosonicon-outline-kosonicon/32/external-temperatures-temperature-kosonicon-outline-kosonicon.png" />
+        </div>
+        <div id="rh-colorizer" class="colorizer-menu-item">
+          <img class="colorizer-menu-icon" src="https://img.icons8.com/sf-regular/32/invert-colors.png" />
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="left-content">
         <p class="location">台北市</p>
@@ -62,7 +72,11 @@
 
       <div class="root"></div>
     </div>
-
+    <script>
+      const config = {
+        API_KEY: "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5"
+      }
+    </script>
   </body>
 </html>
 

@@ -22,7 +22,7 @@ fetch(url)
         locationArr = data.records.location;
         initWeatherStatus();
         clickedLocation = "台北市";
-        twMap.changeColor(clickedLocation, "#197ac9");
+        // twMap.changeColor(clickedLocation, "#197ac9");
 
     })
 
@@ -30,8 +30,8 @@ fetch(url)
 
 twMap.onclick = (twMap, location) => {
     locationName.innerHTML = location;
-    twMap.changeColor(location, "#197ac9");
-    twMap.changeColor(clickedLocation, "#BBD1EA");
+    // twMap.changeColor(location, "#197ac9",);
+    // twMap.changeColor(clickedLocation, "#BBD1EA");
     clickedLocation = location;
     locationArr.forEach(element => {
         if (element.locationName === location) {
