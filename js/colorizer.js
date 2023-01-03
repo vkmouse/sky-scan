@@ -1,37 +1,59 @@
+const hoverColor = "#507DBC"
+
 /** (twMap: TaiwanMap) */
 const setup = (twMap) => {
   const temperatureColorizer = new TemperatureMapColorizer(twMap)
   const temperatureElement = document.getElementById("temperature-colorizer")
-  temperatureElement.addEventListener("click", temperatureColorizer.changeColor);
+  temperatureElement.addEventListener("click", () => {
+    temperatureColorizer.changeColor()
+    temperatureColorizer.setTooltip()
+  });
 
   const rhColorizer = new RelativeHumidityColorizer(twMap);
   const rhElement = document.getElementById("rh-colorizer")
-  rhElement.addEventListener("click", rhColorizer.changeColor);
+  rhElement.addEventListener("click", () => {
+    rhColorizer.changeColor()
+    rhColorizer.setTooltip()
+  });
 }
 
 class TemperatureMapColorizer {
+  locations = []
 
   /** (twMap: TaiwanMap) */
   constructor(twMap) {
     this.twMap = twMap
   }
 
-  changeColor = () => {
+  changeColor = async () => {
+    await this.fetchData()
+    for (const loc of this.locations) {
+      const avg = (Number(loc.min) + Number(loc.max)) / 2
+      const color = this.getColor(avg)
+      this.twMap.changeColor(loc.name, color, hoverColor)
+    }
+  }
+
+  setTooltip = () => {
+    this.twMap.onmouseenter = (_, location) => {
+      const loc = this.locations.filter(m => m.name === location)[0]
+      const avg = (Number(loc.min) + Number(loc.max)) / 2
+      this.twMap.setTooltip(`${loc.name} 溫度 ${avg} 度`);
+    }
+    this.twMap.onmouseleave = () => {
+      this.twMap.resetTooltip();
+    }
+  }
+
+  fetchData = async () => {
     const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${config.API_KEY}&elementName=MinT,MaxT`
-    fetch(url)
-    .then(response => response.json())
-    .then(body => {
-      const locations = body.records.location.map(loc => {
-        return {
-          name: loc.locationName,
-          min: loc.weatherElement[0].time[0].parameter.parameterName,
-          max: loc.weatherElement[1].time[0].parameter.parameterName,
-        }
-      })
-      const hoverColor = "#507DBC"
-      for (const loc of locations) {
-        const color = this.getColor((Number(loc.min) + Number(loc.max)) / 2)
-        this.twMap.changeColor(loc.name, color, hoverColor)
+    const response = await fetch(url)
+    const body = await response.json()
+    this.locations = body.records.location.map(loc => {
+      return {
+        name: loc.locationName,
+        min: loc.weatherElement[0].time[0].parameter.parameterName,
+        max: loc.weatherElement[1].time[0].parameter.parameterName,
       }
     })
   }
@@ -58,28 +80,39 @@ class TemperatureMapColorizer {
 }
 
 class RelativeHumidityColorizer {
+  locations = []
 
   /** (twMap: TaiwanMap) */
   constructor(twMap) {
     this.twMap = twMap
   }
 
-  changeColor = () => {
+  changeColor = async () => {
+    await this.fetchData();
+    for (const loc of this.locations) {
+      const color = this.getColor(loc.RH)
+      this.twMap.changeColor(loc.name, color, hoverColor)
+    }
+  }
+
+  setTooltip = () => {
+    this.twMap.onmouseenter = (_, location) => {
+      const loc = this.locations.filter(m => m.name === location)[0]
+      this.twMap.setTooltip(`${loc.name} 相對溼度 ${loc.RH}%`);
+    }
+    this.twMap.onmouseleave = () => {
+      this.twMap.resetTooltip();
+    }
+  }
+
+  fetchData = async () => {
     const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=${config.API_KEY}&elementName=RH`
-    fetch(url)
-    .then(response => response.json())
-    .then(body => {
-      const locations = body.records.locations[0].location.map(loc => {
-        return {
-          name: loc.locationName,
-          RH: loc.weatherElement.filter(m => m.elementName === "RH")[0].time[0].elementValue[0].value
-        }
-      })
-      const hoverColor = "#507DBC"
-      
-      for (const loc of locations) {
-        const color = this.getColor(loc.RH)
-        this.twMap.changeColor(loc.name, color, hoverColor)
+    const response = await fetch(url)
+    const body = await response.json()
+    this.locations = body.records.locations[0].location.map(loc => {
+      return {
+        name: loc.locationName,
+        RH: loc.weatherElement.filter(m => m.elementName === "RH")[0].time[0].elementValue[0].value
       }
     })
   }
