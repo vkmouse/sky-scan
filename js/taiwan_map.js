@@ -66,7 +66,7 @@ class TaiwanMap {
 
   /** (location: string, color: string, hoverColor: string) => void */
   changeColor = (location, color, hoverColor) => {
-    const res = locations.filter(loc => loc.location === location.replace("臺", "台"))
+    const res = locations.filter(loc => loc.location === location.replace("台", "臺"))
     if (res.length > 0) {
       const group = document.getElementById(res[0].id)
       const path = group.getElementsByTagName("path")[0]
