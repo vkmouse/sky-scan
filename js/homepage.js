@@ -3,7 +3,7 @@ import TaiwanMap from "./taiwan_map.js";
 
 const root = document.getElementsByClassName("root")[0];
 const twMap = new TaiwanMap(root);
-const url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-E09A0AE9-71E8-4ABE-95D4-048AF8BCD5B1&locationName="
+const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${config.Authorization_Key}&locationName=`
 const locationName = document.querySelector(".location");
 const precipitation = document.querySelectorAll(".weather-status");
 const precipitationFont = document.querySelectorAll(".probability-of-precipitation-font");
@@ -11,7 +11,9 @@ const weatherImage = document.querySelectorAll(".weather-status-image");
 const temperature = document.querySelectorAll(".temperature");
 
 let locationArr = null;
-let clickedLocation;
+let prevClickedLocation;
+
+
 
 
 fetch(url)
@@ -21,8 +23,8 @@ fetch(url)
     .then((data) => {
         locationArr = data.records.location;
         initWeatherStatus();
-        clickedLocation = "台北市";
-        // twMap.changeColor(clickedLocation, "#197ac9");
+        prevClickedLocation = "台北市";
+        twMap.changeColor(prevClickedLocation, "#197ac9");
 
     })
 
@@ -30,9 +32,9 @@ fetch(url)
 
 twMap.onclick = (twMap, location) => {
     locationName.innerHTML = location;
-    // twMap.changeColor(location, "#197ac9",);
-    // twMap.changeColor(clickedLocation, "#BBD1EA");
-    clickedLocation = location;
+    twMap.changeColor(location, "#197ac9",);
+    twMap.changeColor(prevClickedLocation, "#BBD1EA");
+    prevClickedLocation = location;
     locationArr.forEach(element => {
         if (element.locationName === location) {
             precipitation[0].innerHTML = element.weatherElement[0].time[0].parameter.parameterName;
