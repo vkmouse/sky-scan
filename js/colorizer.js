@@ -5,6 +5,10 @@ const setup = (twMap) => {
   const temperatureColorizer = new TemperatureMapColorizer(twMap)
   const temperatureElement = document.getElementById("temperature-colorizer")
   temperatureElement.addEventListener("click", temperatureColorizer.changeColor);
+
+  const rhColorizer = new RelativeHumidityColorizer(twMap);
+  const rhElement = document.getElementById("rh-colorizer")
+  rhElement.addEventListener("click", rhColorizer.changeColor);
 }
 
 class TemperatureMapColorizer {
@@ -51,6 +55,48 @@ class TemperatureMapColorizer {
       return temperatureMap[temperatureMap.length - 1]
     } else {
       return temperatureMap[Math.ceil(temperature)]
+    }
+  }
+}
+
+class RelativeHumidityColorizer {
+
+  /** (twMap: TaiwanMap) */
+  constructor(twMap) {
+    this.twMap = twMap
+  }
+
+  changeColor = () => {
+    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=${API_KEY}&elementName=RH`
+    fetch(url)
+    .then(response => response.json())
+    .then(body => {
+      const locations = body.records.locations[0].location.map(loc => {
+        return {
+          name: loc.locationName,
+          RH: loc.weatherElement.filter(m => m.elementName === "RH")[0].time[0].elementValue[0].value
+        }
+      })
+      const hoverColor = "#507DBC"
+      
+      for (const loc of locations) {
+        const color = this.getColor(loc.RH)
+        this.twMap.changeColor(loc.name, color, hoverColor)
+      }
+    })
+  }
+
+  getColor = (value) => {
+    const colorMap = [
+      "#AE6E38", "#AE9238", "#69AE38", "#36AF94", "#38AEEA", 
+      "#3886AE", "#3885AE", "#3871A6", "#384774"
+    ]
+    if (value < 0) {
+      return colorMap[0]
+    } else if (value >= 100) {
+      return colorMap[colorMap.length - 1]
+    } else {
+      return colorMap[Math.ceil(value / 100 * (colorMap.length - 1))]
     }
   }
 }
