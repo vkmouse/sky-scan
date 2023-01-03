@@ -12,12 +12,15 @@ class TaiwanMap {
   onclick = (twMap, location) => void 0
   onmouseenter = (twMap, location) => void 0
   onmouseleave = (twMap, location) => void 0
+  palette = []
+  
   /** (mapContainer: HTMLElement) */
   constructor(mapContainer) {
     this.mapContainer = mapContainer
     this.mapContainer.innerHTML = mapHTML
     this.initEvent()
     this.initTooltip()
+    this.initPalette()
   }
 
   initEvent = () => {
@@ -51,6 +54,16 @@ class TaiwanMap {
     }
   }
 
+  initPalette = () => {
+    this.palette = locations.map(loc => {
+      return {
+        location: loc.location,
+        color: "#BBD1EA",
+        hoverColor: "#197AC9", 
+      }
+    })
+  }
+
   /** (location: string, color: string, hoverColor: string) => void */
   changeColor = (location, color, hoverColor) => {
     const res = locations.filter(loc => loc.location === location.replace("臺", "台"))
@@ -67,6 +80,20 @@ class TaiwanMap {
     } else {
       console.log("Error: Unable to change color. No location specified.")
     }
+  }
+
+  /** () => void */
+  resetColor = () => {
+    for (const obj of this.palette) {
+      this.changeColor(obj.location, obj.color, obj.hoverColor)
+    }
+  }
+
+  setPalette = (location, color, hoverColor) => {
+    this.palette = [
+      ...this.palette.filter(m => m.location !== location),
+      { location, color, hoverColor }
+    ]
   }
 
   setTooltip = (value) => {

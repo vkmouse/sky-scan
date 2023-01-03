@@ -31,6 +31,7 @@ class TemperatureMapColorizer {
       const avg = (Number(loc.min) + Number(loc.max)) / 2
       const color = this.getColor(avg)
       this.twMap.changeColor(loc.name, color, hoverColor)
+      this.twMap.setPalette(loc.name, color, hoverColor)
     }
   }
 
@@ -94,6 +95,7 @@ class RelativeHumidityColorizer {
     for (const loc of this.locations) {
       const color = this.getColor(loc.RH)
       this.twMap.changeColor(loc.name, color, hoverColor)
+      this.twMap.setPalette(loc.name, color, hoverColor)
     }
   }
 
