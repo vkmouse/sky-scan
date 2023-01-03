@@ -23,6 +23,7 @@ fetch(url)
     })
     .then((data) => {
         locationArr = data.records.location;
+        console.log(locationArr);
         initWeatherStatus();
         prevClickedLocation = "台北市";
         twMap.changeColor(prevClickedLocation, "#197ac9");
@@ -37,7 +38,11 @@ twMap.onclick = (twMap, location) => {
     twMap.changeColor(location, "#197ac9",);
     prevClickedLocation = location;
     locationArr.forEach(element => {
+
         if (element.locationName === location) {
+            console.log(element.locationName)
+            console.log(location)
+            console.log("here")
             precipitation[0].innerHTML = element.weatherElement[0].time[0].parameter.parameterName;
             precipitation[1].innerHTML = element.weatherElement[0].time[1].parameter.parameterName;
             precipitation[2].innerHTML = element.weatherElement[0].time[2].parameter.parameterName;
@@ -53,6 +58,7 @@ twMap.onclick = (twMap, location) => {
                 ${element.weatherElement[4].time[1].parameter.parameterName}°`;
             temperature[2].innerHTML = `${element.weatherElement[2].time[2].parameter.parameterName}° ~ \
                 ${element.weatherElement[4].time[2].parameter.parameterName}°`;
+
 
 
         }
