@@ -1,0 +1,152 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.today-morning-weather {
+    background-color: #1a67b1;
+    padding: 45px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 230px;
+}
+
+.today-morning-weather p {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.today-night-weather {
+    background-color: #1a67b1;
+    padding: 45px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 230px;
+
+}
+
+.today-night-weather p {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.tomorrow-morning-weather {
+    background-color: #1a67b1;
+    padding: 45px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 230px;
+
+}
+
+.tomorrow-morning-weather p {
+    font-size: 25px;
+    margin-bottom: 15px;
+
+
+}
+
+.container {
+    display: flex;
+    /* background-color: rgb(41, 134, 255); */
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    justify-content: center;
+}
+
+.left-content {
+    margin-top: 100px;
+    width: 700px;
+}
+
+.weather-status-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.weather-status-content p {
+    color: white;
+    text-align: center;
+
+
+}
+
+.weather-status-image {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.probability-of-precipitation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+
+.probability-of-precipitation p {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+
+
+.umbrella-image {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+.location {
+    text-align: center;
+    font-size: 40px;
+    background-color: #1a67b1;
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 5px;
+
+}
+
+.town-info-btn {
+    color: white;
+    cursor: pointer;
+    background-color: #1a67b1;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 20px;
+    width: 50%;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.town-info-btn img {
+    width: 30px;
+}
+
+.week-weather-btn {
+    color: white;
+    cursor: pointer;
+    background-color: #1a67b1;
+    border-radius: 6px;
+    font-size: 20px;
+    width: 50%;
+    padding: 10px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.week-weather-btn img {
+    width: 30px;
+
+}

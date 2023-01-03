@@ -10,4 +10,5 @@
 
 .taiwan-map svg path:hover {
   fill: #507DBC;
+  cursor: pointer;
 }
