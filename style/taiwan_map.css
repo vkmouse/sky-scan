@@ -1,5 +1,6 @@
 .taiwan-map {
-  width: 700px;
+  width: 600px;
+  margin-top: 100px;
 }
 
 .taiwan-map svg path {
