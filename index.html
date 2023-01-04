@@ -59,14 +59,30 @@
           </div>
         </div>
         
-        <div id="regionForecast" class="town-info-btn">
-          <p >鄉鎮預報總覽</p>
-          <img src="images/right-arrow.png"/>
-        </div>
-        <div class="week-weather-btn">
-          <p>一周天氣預報</p>
-          <img src="images/right-arrow.png"/>
-        </div>
+          <div class="bottom-content">
+            <div class="bottom-left">
+              <div id="regionForecast" class="town-info-btn">
+                <p >鄉鎮預報總覽</p>
+                <img src="images/right-arrow.png"/>
+              </div>
+              <div class="week-weather-btn">
+                <p>一周天氣預報</p>
+                <img src="images/right-arrow.png"/>
+              </div>
+            </div>
+            <div class="bottom-right">
+              <div class="bottom-right-title">
+                <p>空氣品質監測</p>
+                <select class="location-selection">
+                </select>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar">
+                </div>
+              </div>
+              <p class="progress-bar-num">0</p>
+            </div>
+          </div>
 
       </div>
 
@@ -75,7 +91,8 @@
     <script>
       const config = {
         API_KEY: "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5",
-        Authorization_Key:"CWB-E09A0AE9-71E8-4ABE-95D4-048AF8BCD5B1"
+        Authorization_Key:"CWB-E09A0AE9-71E8-4ABE-95D4-048AF8BCD5B1",
+        Aqi_Api_Key : "e8dd42e6-9b8b-43f8-991e-b3dee723a52d"
       }
       
     </script>

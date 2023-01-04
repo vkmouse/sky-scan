@@ -10,13 +10,15 @@ const precipitation = document.querySelectorAll(".weather-status");
 const precipitationFont = document.querySelectorAll(".probability-of-precipitation-font");
 const weatherImage = document.querySelectorAll(".weather-status-image");
 const temperature = document.querySelectorAll(".temperature");
+const progressBar = document.querySelector(".progress-bar");
+const progressBarNum = document.querySelector(".progress-bar-num");
+const locationSelection = document.querySelector(".location-selection");
 const regionForecast = document.querySelector("#regionForecast");
 
 let locationArr = null;
-let prevClickedLocation;
-
+let prevClickedLocation, newOption, aqiRecords, aqiNumber;
+let auiObject = {};
 setupColorizer(twMap);
-
 
 fetch(url)
     .then((response) => {
@@ -24,7 +26,6 @@ fetch(url)
     })
     .then((data) => {
         locationArr = data.records.location;
-        console.log(locationArr);
         initWeatherStatus();
         prevClickedLocation = "台北市";
         twMap.changeColor(prevClickedLocation, "#197ac9");
@@ -38,12 +39,16 @@ twMap.onclick = (twMap, location) => {
     twMap.resetColor(location)
     twMap.changeColor(location, "#197ac9",);
     prevClickedLocation = location;
+
+    // 清除空氣品質檢測的地區 //
+    let locationOption = document.querySelectorAll(".location-option");
+    locationOption.forEach(element => {
+        element.remove();
+    })
+
     locationArr.forEach(element => {
 
         if (element.locationName === location) {
-            console.log(element.locationName)
-            console.log(location)
-            console.log("here")
             precipitation[0].innerHTML = element.weatherElement[0].time[0].parameter.parameterName;
             precipitation[1].innerHTML = element.weatherElement[0].time[1].parameter.parameterName;
             precipitation[2].innerHTML = element.weatherElement[0].time[2].parameter.parameterName;
@@ -59,11 +64,65 @@ twMap.onclick = (twMap, location) => {
                 ${element.weatherElement[4].time[1].parameter.parameterName}°`;
             temperature[2].innerHTML = `${element.weatherElement[2].time[2].parameter.parameterName}° ~ \
                 ${element.weatherElement[4].time[2].parameter.parameterName}°`;
-
-
-
         }
     });
+
+    //空氣品質檢測api//
+    fetch(`https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=${config.Aqi_Api_Key}&limit=1000&sort=ImportDate%20desc&format=JSON`)
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            aqiRecords = data.records;
+            console.log(aqiRecords);
+            aqiRecords.forEach(element => {
+                if (location === element.county) {
+                    newOption = document.createElement("option");
+                    newOption.value = element.sitename;
+                    newOption.innerHTML = element.sitename;
+                    newOption.className = "location-option";
+                    locationSelection.appendChild(newOption);
+                    auiObject[element.sitename] = element.aqi;
+                }
+            })
+            let index = locationSelection.selectedIndex;
+            aqiNumber = Number(auiObject[locationSelection.options[index].value]);
+            let width = 0;
+            let timer = setInterval(() => {
+                if (width === aqiNumber + 1) {
+                    clearInterval(timer);
+                    return;
+                }
+                progressBar.style.width = `${width}px`;
+                progressBarNum.innerHTML = width;
+                width++;
+            }, 10)
+
+
+
+            locationSelection.addEventListener("change", (e) => {
+                aqiNumber = Number(auiObject[e.target.value]);
+                let width = 0;
+                let timer = setInterval(() => {
+                    if (width === aqiNumber + 1) {
+                        clearInterval(timer);
+                        return;
+                    }
+                    if (width > 50) {
+                        progressBar.style.backgroundColor = "yellow";
+                    }
+                    if (width > 100) {
+                        progressBar.style.backgroundColor = "orange";
+                    }
+                    if (width > 150) {
+                        progressBar.style.backgroundColor = "red";
+                    }
+                    progressBar.style.width = `${width}px`;
+                    progressBarNum.innerHTML = width;
+                    width++;
+                }, 10)
+            })
+        })
 }
 
 regionForecast.onclick = () => {
@@ -71,6 +130,11 @@ regionForecast.onclick = () => {
   window.location =
     window.location.href + `regionForecast.html?locationName=${location}`;
 };
+fetch("https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data", {
+    headers: {
+        "Content-type": "text/css"
+    }
+})
 
 function determineWeatherImage(object, image) {
     if (object.innerHTML === "晴天") {
@@ -103,4 +167,5 @@ function initWeatherStatus() {
             ${locationArr[5].weatherElement[4].time[1].parameter.parameterName}°`;
     temperature[2].innerHTML = `${locationArr[5].weatherElement[2].time[2].parameter.parameterName}° ~ \
             ${locationArr[5].weatherElement[4].time[2].parameter.parameterName}°`;
+
 }
