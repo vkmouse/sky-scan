@@ -10,6 +10,7 @@ const precipitation = document.querySelectorAll(".weather-status");
 const precipitationFont = document.querySelectorAll(".probability-of-precipitation-font");
 const weatherImage = document.querySelectorAll(".weather-status-image");
 const temperature = document.querySelectorAll(".temperature");
+const regionForecast = document.querySelector("#regionForecast");
 
 let locationArr = null;
 let prevClickedLocation;
@@ -65,7 +66,11 @@ twMap.onclick = (twMap, location) => {
     });
 }
 
-
+regionForecast.onclick = () => {
+  const location = document.querySelector(".location").textContent;
+  window.location =
+    window.location.href + `regionForecast.html?locationName=${location}`;
+};
 
 function determineWeatherImage(object, image) {
     if (object.innerHTML === "晴天") {
