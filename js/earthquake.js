@@ -9,7 +9,7 @@ addGoogleMapScript("")
 
 async function getEarthquake(callback){
     try{
-        const response = await fetch(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/E-A0015-001?Authorization=CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5`);
+        const response = await fetch(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/E-A0015-001?Authorization=${config.Authorization_Key}`);
         const result = await response.json();
         if(result.error){
             console.log(result)

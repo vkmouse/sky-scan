@@ -146,6 +146,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     margin-right: 5px;
+    text-decoration: none;
 }
 
 .week-weather-btn img {
