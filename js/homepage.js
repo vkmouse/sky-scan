@@ -14,11 +14,13 @@ const progressBar = document.querySelector(".progress-bar");
 const progressBarNum = document.querySelector(".progress-bar-num");
 const locationSelection = document.querySelector(".location-selection");
 const regionForecast = document.querySelector("#regionForecast");
+const airStatusImage = document.querySelector(".face-status");
 
 let locationArr = null;
 let prevClickedLocation, newOption, aqiRecords, aqiNumber;
-let auiObject = {};
+let aqiObject = {};
 setupColorizer(twMap);
+let isloading = false;
 
 fetch(url)
     .then((response) => {
@@ -39,6 +41,7 @@ twMap.onclick = (twMap, location) => {
     twMap.resetColor(location)
     twMap.selectLocation(location)
     prevClickedLocation = location;
+
 
     // 清除空氣品質檢測的地區 //
     let locationOption = document.querySelectorAll(".location-option");
@@ -74,7 +77,6 @@ twMap.onclick = (twMap, location) => {
         })
         .then((data) => {
             aqiRecords = data.records;
-            console.log(aqiRecords);
             aqiRecords.forEach(element => {
                 if (location === element.county) {
                     newOption = document.createElement("option");
@@ -82,59 +84,30 @@ twMap.onclick = (twMap, location) => {
                     newOption.innerHTML = element.sitename;
                     newOption.className = "location-option";
                     locationSelection.appendChild(newOption);
-                    auiObject[element.sitename] = element.aqi;
+                    aqiObject[element.sitename] = element.aqi;
                 }
             })
             let index = locationSelection.selectedIndex;
-            aqiNumber = Number(auiObject[locationSelection.options[index].value]);
-            let width = 0;
-            let timer = setInterval(() => {
-                if (width === aqiNumber + 1) {
-                    clearInterval(timer);
-                    return;
-                }
-                progressBar.style.width = `${width}px`;
-                progressBarNum.innerHTML = width;
-                width++;
-            }, 10)
-
-
-
-            locationSelection.addEventListener("change", (e) => {
-                aqiNumber = Number(auiObject[e.target.value]);
-                let width = 0;
-                let timer = setInterval(() => {
-                    if (width === aqiNumber + 1) {
-                        clearInterval(timer);
-                        return;
-                    }
-                    if (width > 50) {
-                        progressBar.style.backgroundColor = "yellow";
-                    }
-                    if (width > 100) {
-                        progressBar.style.backgroundColor = "orange";
-                    }
-                    if (width > 150) {
-                        progressBar.style.backgroundColor = "red";
-                    }
-                    progressBar.style.width = `${width}px`;
-                    progressBarNum.innerHTML = width;
-                    width++;
-                }, 10)
-            })
+            if (isloading === false) {
+                aqiNumber = Number(aqiObject[locationSelection.options[index].value]);
+                airQualityMonitoring(aqiNumber);
+            }
         })
 }
 
 regionForecast.onclick = () => {
-  const location = document.querySelector(".location").textContent;
-  window.location =
-    window.location.href + `regionForecast.html?locationName=${location}`;
+    const location = document.querySelector(".location").textContent;
+    window.location =
+        window.location.href + `regionForecast.html?locationName=${location}`;
 };
-fetch("https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data", {
-    headers: {
-        "Content-type": "text/css"
+
+locationSelection.addEventListener("change", (e) => {
+    if (isloading === false) {
+        aqiNumber = Number(aqiObject[e.target.value]);
+        airQualityMonitoring(aqiNumber);
     }
 })
+
 
 function determineWeatherImage(object, image) {
     if (object.innerHTML === "晴天") {
@@ -149,6 +122,37 @@ function determineWeatherImage(object, image) {
         image.src = "images/cloudy.png";
     }
 }
+
+//空氣檢測進度條
+function airQualityMonitoring(aqiNumber) {
+    isloading = true;
+    progressBar.style.backgroundColor = "rgb(60, 255, 1)";
+    let width = 0;
+    let timer = setInterval(() => {
+        if (width >= aqiNumber + 1) {
+            clearInterval(timer);
+            isloading = false;
+            return;
+        }
+        airStatusImage.src = "images/laughing.png";
+        if (width > 50) {
+            progressBar.style.backgroundColor = "yellow";
+            airStatusImage.src = "images/happy.png";
+        }
+        if (width > 100) {
+            progressBar.style.backgroundColor = "orange";
+            airStatusImage.src = "images/soso.png";
+        }
+        if (width > 150) {
+            progressBar.style.backgroundColor = "red";
+            airStatusImage.src = "images/notGood.png";
+        }
+        progressBar.style.width = `${width}px`;
+        progressBarNum.innerHTML = width;
+        width++;
+    }, 10)
+}
+
 
 //初始值是台北市的資料
 function initWeatherStatus() {
