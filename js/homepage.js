@@ -1,5 +1,6 @@
 import TaiwanMap from "./taiwan_map.js";
 import { setup as setupColorizer } from "./colorizer.js";
+import { showWeekForecast } from "./forecast.js";
 
 
 const root = document.getElementsByClassName("root")[0];
@@ -14,6 +15,7 @@ const progressBar = document.querySelector(".progress-bar");
 const progressBarNum = document.querySelector(".progress-bar-num");
 const locationSelection = document.querySelector(".location-selection");
 const regionForecast = document.querySelector("#regionForecast");
+const weekWeather = document.querySelector('.week-weather-btn')
 
 let locationArr = null;
 let prevClickedLocation, newOption, aqiRecords, aqiNumber;
@@ -135,6 +137,12 @@ fetch("https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data", {
         "Content-type": "text/css"
     }
 })
+
+weekWeather.onclick = () => {
+    const location = document.querySelector(".location").textContent;
+    showWeekForecast(location);
+    console.log(location)
+}
 
 function determineWeatherImage(object, image) {
     if (object.innerHTML === "晴天") {
