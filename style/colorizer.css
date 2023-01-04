@@ -1,35 +1,31 @@
-body {
-  margin: 0px;
-}
-
 .colorizer-container {
   position: fixed;
-  width: 32px;
+  width: 40px;
   height: 100vh;
-  left: calc(100% - 32px);
+  top: 20px;
+  left: calc(100% - 40px - 20px);
   user-select: none;
 }
 
 .colorizer-menu {
-  width: 32px;
-  margin-top: 16px;
-  background-color: #eee;
+  width: 40px;
+  background-color: #ddd;
   border-radius: 5px;
 }
 
 .colorizer-menu-item {
-  padding: 3px 0;
+  padding: 0px 0;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .colorizer-menu-item:hover {
-  background-color: #ddd;
+  background-color: #eee;
 }
 
 .colorizer-menu-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   object-fit: none;
   object-position: center;
 }

@@ -1,4 +1,5 @@
 import TaiwanMap from "./taiwan_map.js";
+import { setup as setupColorizer } from "./colorizer.js";
 
 
 const root = document.getElementsByClassName("root")[0];
@@ -12,11 +13,13 @@ const temperature = document.querySelectorAll(".temperature");
 const progressBar = document.querySelector(".progress-bar");
 const progressBarNum = document.querySelector(".progress-bar-num");
 const locationSelection = document.querySelector(".location-selection");
+const regionForecast = document.querySelector("#regionForecast");
 const airStatusImage = document.querySelector(".face-status");
 
 let locationArr = null;
 let prevClickedLocation, newOption, aqiRecords, aqiNumber;
 let aqiObject = {};
+setupColorizer(twMap);
 let isloading = false;
 
 fetch(url)
@@ -35,8 +38,8 @@ fetch(url)
 
 twMap.onclick = (twMap, location) => {
     locationName.innerHTML = location;
-    twMap.changeColor(location, "#197ac9",);
-    twMap.changeColor(prevClickedLocation, "#BBD1EA");
+    twMap.resetColor(location)
+    twMap.selectLocation(location)
     prevClickedLocation = location;
 
 
@@ -92,7 +95,11 @@ twMap.onclick = (twMap, location) => {
         })
 }
 
-
+regionForecast.onclick = () => {
+    const location = document.querySelector(".location").textContent;
+    window.location =
+        window.location.href + `regionForecast.html?locationName=${location}`;
+};
 
 locationSelection.addEventListener("change", (e) => {
     if (isloading === false) {
