@@ -1,4 +1,4 @@
-let CWB_API_KEY = 'CWB-55ADF3AD-8948-4D48-AA53-300D12842DFB';
+let CWB_API_KEY = config.Authorization_Key;
 let locationName = '宜蘭縣';
 let sort = 'time';
 let url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=${CWB_API_KEY}&locationName=${locationName}&sort=${sort}`;

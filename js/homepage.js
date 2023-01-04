@@ -15,7 +15,9 @@ const progressBar = document.querySelector(".progress-bar");
 const progressBarNum = document.querySelector(".progress-bar-num");
 const locationSelection = document.querySelector(".location-selection");
 const regionForecast = document.querySelector("#regionForecast");
-const weekWeather = document.querySelector('.week-weather-btn')
+const airStatusImage = document.querySelector(".face-status");
+const placeholderImage = document.querySelector(".placeholder-image");
+const weekWeather = document.querySelector('.week-weather-btn');
 
 let locationArr = null;
 let prevClickedLocation, newOption, aqiRecords, aqiNumber;
