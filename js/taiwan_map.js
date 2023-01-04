@@ -59,10 +59,26 @@ class TaiwanMap {
       return {
         location: loc.location,
         color: "#BBD1EA",
-        hoverColor: "#197AC9", 
+        hoverColor: "#507DBC", 
+        selectedColor: "#197AC9"
       }
     })
   }
+
+  selectLocation = (location) => {
+   const res = locations.filter(loc => loc.location === location.replace("台", "臺"))
+   if (res.length > 0) {
+     const group = document.getElementById(res[0].id)
+     const path = group.getElementsByTagName("path")[0]
+     const locationColor = this.palette.filter(m => m.location === location)[0]
+     path.addEventListener('mouseout', () => {
+       path.style.fill = locationColor.selectedColor;
+     });
+     path.style.fill = locationColor.selectedColor
+   } else {
+     console.log("Error: Unable to change color. No location specified.")
+   }
+ }
 
   /** (location: string, color: string, hoverColor: string) => void */
   changeColor = (location, color, hoverColor) => {
@@ -89,10 +105,10 @@ class TaiwanMap {
     }
   }
 
-  setPalette = (location, color, hoverColor) => {
+  setPalette = (location, color, hoverColor, selectedColor) => {
     this.palette = [
       ...this.palette.filter(m => m.location !== location),
-      { location, color, hoverColor }
+      { location, color, hoverColor, selectedColor }
     ]
   }
 
