@@ -149,7 +149,7 @@ const locations = [
 const mapHTML = `
   <div class="taiwan-map">
     
-    <img class="placeholder-image" src="../images/placeholder.png"/>
+    <img class="placeholder-image" src="images/placeholder.png"/>
     
     <div class="taiwan-map-tooltip"></div>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 535" style="enable-background:new 0 0 400 535" xml:space="preserve" fill="white" class=" drawsvg-initialized ">
