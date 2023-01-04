@@ -37,7 +37,7 @@ fetch(url)
 twMap.onclick = (twMap, location) => {
     locationName.innerHTML = location;
     twMap.resetColor(location)
-    twMap.changeColor(location, "#197ac9",);
+    twMap.selectLocation(location)
     prevClickedLocation = location;
 
     // 清除空氣品質檢測的地區 //

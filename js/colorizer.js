@@ -1,7 +1,12 @@
-const hoverColor = "#507DBC"
-
 /** (twMap: TaiwanMap) */
 const setup = (twMap) => {
+  const defaultColorizer = new DefaultColorizer(twMap)
+  const defaultElement = document.getElementById("default-colorizer")
+  defaultElement.addEventListener("click", () => {
+    defaultColorizer.changeColor()
+    defaultColorizer.setTooltip()
+  });
+
   const temperatureColorizer = new TemperatureMapColorizer(twMap)
   const temperatureElement = document.getElementById("temperature-colorizer")
   temperatureElement.addEventListener("click", () => {
@@ -17,8 +22,66 @@ const setup = (twMap) => {
   });
 }
 
+
+class DefaultColorizer {
+  locations = [
+    { name: "基隆市" },
+    { name: "新北市" },
+    { name: "臺北市" },
+    { name: "桃園市" },
+    { name: "新竹縣" },
+    { name: "新竹市" },
+    { name: "苗栗縣" },
+    { name: "臺中市" },
+    { name: "南投縣" },
+    { name: "彰化縣" },
+    { name: "雲林縣" },
+    { name: "嘉義縣" },
+    { name: "嘉義市" },
+    { name: "臺南市" },
+    { name: "高雄市" },
+    { name: "屏東縣" },
+    { name: "臺東縣" },
+    { name: "花蓮縣" },
+    { name: "宜蘭縣" },
+    { name: "澎湖縣" },
+    { name: "金門縣" },
+    { name: "連江縣" },
+  ]
+  color = "#BBD1EA"
+  hoverColor = "#507DBC"
+  selectedColor = "#197AC9"
+
+  /** (twMap: TaiwanMap) */
+  constructor(twMap) {
+    this.twMap = twMap
+  }
+
+  changeColor = () => {
+    for (const loc of this.locations) {
+      this.twMap.changeColor(loc.name, this.color, this.hoverColor)
+      this.twMap.setPalette(loc.name, this.color, this.hoverColor, this.selectedColor)
+    }
+  }
+
+  setTooltip = () => {
+    this.twMap.onmouseenter = (_, location) => {
+      const loc = this.locations.filter(m => m.name === location)[0]
+      if (loc) {
+        this.twMap.setTooltip(`${loc.name}`);
+      }
+    }
+    this.twMap.onmouseleave = () => {
+      this.twMap.resetTooltip();
+    }
+  }
+}
+
+
 class TemperatureMapColorizer {
   locations = []
+  hoverColor = "#D8FFDB"
+  selectedColor = "#E5F9E6"
 
   /** (twMap: TaiwanMap) */
   constructor(twMap) {
@@ -30,8 +93,8 @@ class TemperatureMapColorizer {
     for (const loc of this.locations) {
       const avg = (Number(loc.min) + Number(loc.max)) / 2
       const color = this.getColor(avg)
-      this.twMap.changeColor(loc.name, color, hoverColor)
-      this.twMap.setPalette(loc.name, color, hoverColor)
+      this.twMap.changeColor(loc.name, color, this.hoverColor)
+      this.twMap.setPalette(loc.name, color, this.hoverColor, this.selectedColor)
     }
   }
 
@@ -84,6 +147,8 @@ class TemperatureMapColorizer {
 
 class RelativeHumidityColorizer {
   locations = []
+  hoverColor = "#91BBF2"
+  selectedColor = "#B2D3FF"
 
   /** (twMap: TaiwanMap) */
   constructor(twMap) {
@@ -94,8 +159,8 @@ class RelativeHumidityColorizer {
     await this.fetchData();
     for (const loc of this.locations) {
       const color = this.getColor(loc.RH)
-      this.twMap.changeColor(loc.name, color, hoverColor)
-      this.twMap.setPalette(loc.name, color, hoverColor)
+      this.twMap.changeColor(loc.name, color, this.hoverColor)
+      this.twMap.setPalette(loc.name, color, this.hoverColor, this.selectedColor)
     }
   }
 
