@@ -13,7 +13,7 @@ class TaiwanMap {
   onmouseenter = (twMap, location) => void 0
   onmouseleave = (twMap, location) => void 0
   palette = []
-  
+
   /** (mapContainer: HTMLElement) */
   constructor(mapContainer) {
     this.mapContainer = mapContainer
@@ -36,13 +36,13 @@ class TaiwanMap {
   }
 
   initTooltip = () => {
-   const element = document.getElementsByClassName("taiwan-map-tooltip")[0] 
-   for (const { id } of locations) {
-      
+    const element = document.getElementsByClassName("taiwan-map-tooltip")[0]
+    for (const { id } of locations) {
+
       document.getElementById(id).onmousemove = (e) => {
         const { offsetX, offsetY } = e
-        if (this.tooltip) {       
-          element.textContent = this.tooltip           
+        if (this.tooltip) {
+          element.textContent = this.tooltip
           element.style.display = "block";
           element.style.left = `${offsetX + 20}px`;
           element.style.top = `${offsetY + 20}px`;
@@ -59,26 +59,26 @@ class TaiwanMap {
       return {
         location: loc.location,
         color: "#BBD1EA",
-        hoverColor: "#507DBC", 
+        hoverColor: "#507DBC",
         selectedColor: "#197AC9"
       }
     })
   }
 
   selectLocation = (location) => {
-   const res = locations.filter(loc => loc.location === location.replace("台", "臺"))
-   if (res.length > 0) {
-     const group = document.getElementById(res[0].id)
-     const path = group.getElementsByTagName("path")[0]
-     const locationColor = this.palette.filter(m => m.location === location)[0]
-     path.addEventListener('mouseout', () => {
-       path.style.fill = locationColor.selectedColor;
-     });
-     path.style.fill = locationColor.selectedColor
-   } else {
-     console.log("Error: Unable to change color. No location specified.")
-   }
- }
+    const res = locations.filter(loc => loc.location === location.replace("台", "臺"))
+    if (res.length > 0) {
+      const group = document.getElementById(res[0].id)
+      const path = group.getElementsByTagName("path")[0]
+      const locationColor = this.palette.filter(m => m.location === location)[0]
+      path.addEventListener('mouseout', () => {
+        path.style.fill = locationColor.selectedColor;
+      });
+      path.style.fill = locationColor.selectedColor
+    } else {
+      console.log("Error: Unable to change color. No location specified.")
+    }
+  }
 
   /** (location: string, color: string, hoverColor: string) => void */
   changeColor = (location, color, hoverColor) => {
@@ -87,10 +87,10 @@ class TaiwanMap {
       const group = document.getElementById(res[0].id)
       const path = group.getElementsByTagName("path")[0]
       path.addEventListener('mouseover', () => {
-         path.style.fill = hoverColor;
+        path.style.fill = hoverColor;
       });
       path.addEventListener('mouseout', () => {
-         path.style.fill = color;
+        path.style.fill = color;
       });
       path.style.fill = color;
     } else {
@@ -122,32 +122,35 @@ class TaiwanMap {
 }
 
 const locations = [
-   { id: "C10017", location: "基隆市" },
-   { id: "C65", location: "新北市" },
-   { id: "C63", location: "臺北市" },
-   { id: "C68", location: "桃園市" },
-   { id: "C10004", location: "新竹縣" },
-   { id: "C10018", location: "新竹市" },
-   { id: "C10005", location: "苗栗縣" },
-   { id: "C66", location: "臺中市" },
-   { id: "C10008", location: "南投縣" },
-   { id: "C10007", location: "彰化縣" },
-   { id: "C10009", location: "雲林縣" },
-   { id: "C10010", location: "嘉義縣" },
-   { id: "C10020", location: "嘉義市" },
-   { id: "C67", location: "臺南市" },
-   { id: "C64", location: "高雄市" },
-   { id: "C10013", location: "屏東縣" },
-   { id: "C10014", location: "臺東縣" },
-   { id: "C10015", location: "花蓮縣" },
-   { id: "C10002", location: "宜蘭縣" },
-   { id: "C10016", location: "澎湖縣" },
-   { id: "C09020", location: "金門縣" },
-   { id: "C09007", location: "連江縣" },
+  { id: "C10017", location: "基隆市" },
+  { id: "C65", location: "新北市" },
+  { id: "C63", location: "臺北市" },
+  { id: "C68", location: "桃園市" },
+  { id: "C10004", location: "新竹縣" },
+  { id: "C10018", location: "新竹市" },
+  { id: "C10005", location: "苗栗縣" },
+  { id: "C66", location: "臺中市" },
+  { id: "C10008", location: "南投縣" },
+  { id: "C10007", location: "彰化縣" },
+  { id: "C10009", location: "雲林縣" },
+  { id: "C10010", location: "嘉義縣" },
+  { id: "C10020", location: "嘉義市" },
+  { id: "C67", location: "臺南市" },
+  { id: "C64", location: "高雄市" },
+  { id: "C10013", location: "屏東縣" },
+  { id: "C10014", location: "臺東縣" },
+  { id: "C10015", location: "花蓮縣" },
+  { id: "C10002", location: "宜蘭縣" },
+  { id: "C10016", location: "澎湖縣" },
+  { id: "C09020", location: "金門縣" },
+  { id: "C09007", location: "連江縣" },
 ]
 
 const mapHTML = `
   <div class="taiwan-map">
+    
+    <img class="placeholder-image" src="../images/placeholder.png"/>
+    
     <div class="taiwan-map-tooltip"></div>
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 535" style="enable-background:new 0 0 400 535" xml:space="preserve" fill="white" class=" drawsvg-initialized ">
      <!-- ======================= 基隆市  ======================= -->
@@ -160,6 +163,7 @@ const mapHTML = `
      <!-- ======================= end 基隆市  ======================= -->
      <!-- ======================= 新北市  ======================= -->
      <g id="C65">
+
         <desc>新北市區域</desc>
         <path d="M361.5,72.3c-6.8-0.3-9,0.3-9.3-6.2c1.2-11.2-6.2-9.3-13.7-9.3c-2.4,0-4.5-0.4-6.4-1c1.2,2.3,0.3,3.6,0.7,6.3
            c0.4,2.9,0.6,4.4,0,6.4c-0.6,2.1-11.8-0.6-15.3-6c-3.5-5.4-3.1-7.9-1.7-8.7c1.1-0.7,4.2-1.7,7.7-3.2c-0.8-1.8-0.2-4.7-3.1-4.4
