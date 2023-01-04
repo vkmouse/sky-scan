@@ -112,7 +112,7 @@ class TemperatureMapColorizer {
   }
 
   fetchData = async () => {
-    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${config.API_KEY}&elementName=MinT,MaxT`
+    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${config.Authorization_Key}&elementName=MinT,MaxT`
     const response = await fetch(url)
     const body = await response.json()
     this.locations = body.records.location.map(loc => {
@@ -177,7 +177,7 @@ class RelativeHumidityColorizer {
   }
 
   fetchData = async () => {
-    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=${config.API_KEY}&elementName=RH`
+    const url = `https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=${config.Authorization_Key}&elementName=RH`
     const response = await fetch(url)
     const body = await response.json()
     this.locations = body.records.locations[0].location.map(loc => {

@@ -72,7 +72,7 @@ class RegionForecast {
 
   init = async () => {
     const response = await fetch(
-      `https://opendata.cwb.gov.tw/api/v1/rest/datastore/${this.locationId}?Authorization=${config.API_KEY}`
+      `https://opendata.cwb.gov.tw/api/v1/rest/datastore/${this.locationId}?Authorization=${config.Authorization_Key}`
     );
     const result = await response.json();
     this.regionData = result.records.locations[0].location;
