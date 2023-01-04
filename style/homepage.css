@@ -121,10 +121,11 @@
     border-radius: 6px;
     padding: 10px;
     font-size: 20px;
-    width: 50%;
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
+    margin-right: 5px;
 
 
 }
@@ -139,14 +140,64 @@
     background-color: #1a67b1;
     border-radius: 6px;
     font-size: 20px;
-    width: 50%;
     padding: 10px;
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
+    margin-right: 5px;
 }
 
 .week-weather-btn img {
     width: 30px;
 
 }
+
+.bottom-content {
+    display: flex;
+}
+
+.bottom-left {
+    width: 100%;
+}
+
+.bottom-right {
+    background-color: #1a67b1;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 6px;
+}
+
+.bottom-right-title {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 15px;
+}
+
+.bottom-right p {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.progress-bar-container {
+    background-color: white;
+    width: 80%;
+    height: 20px;
+    margin: auto;
+    border: 2px solid black;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: rgb(60, 255, 1);
+}
+
+select {
+    margin-top: 10px;
+    outline: none;
+}
+
+option {}
