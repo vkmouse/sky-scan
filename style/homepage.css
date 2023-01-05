@@ -189,6 +189,7 @@
     height: 20px;
     margin: auto;
     border: 2px solid black;
+    margin-top: 10px;
 }
 
 .progress-bar {
@@ -217,8 +218,10 @@ select {
 .face-status {
     width: 30px;
     height: 30px;
-    margin-left: 10px;
-    margin-top: 5px;
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+
 }
 
 
