@@ -654,8 +654,8 @@ class RegionForecast {
 }
 
 const locationQueryStr = window.location.href.split("?")[1];
-const locationName = locationQueryStr.split("=")[1];
-const regionForecast = new RegionForecast("臺北市");
+const locationName = decodeURIComponent(locationQueryStr.split("=")[1]);
+const regionForecast = new RegionForecast(locationName);
 const select = document.querySelector("select");
 
 window.onload = () => {
