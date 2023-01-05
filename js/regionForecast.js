@@ -130,7 +130,7 @@ class RegionForecast {
 
     frcst3HR.classList.add("tab-seleted");
     document.querySelector("#HR3_table").classList.remove("none");
-    
+
     // 鄉鎮列表
     let cnt = 0;
     const distSelect = document.querySelector("select");
@@ -148,7 +148,6 @@ class RegionForecast {
     document.querySelector("#city-title").textContent = this.locationName;
     document.querySelector("#dist-title").textContent =
       this.regionData_3hr[this.dist].locationName;
-    
 
     // 逐三小時
     this.getWeatherElement_3hr();
@@ -159,7 +158,7 @@ class RegionForecast {
     // 過去24小時
   };
 
-  // =============================================================================
+  // ================================ 逐三小時預報 =============================================
 
   getWeatherElement_3hr = () => {
     let dateTimeCnt = 0;
@@ -369,7 +368,7 @@ class RegionForecast {
     }
   };
 
-  // =============================================================================
+  // ================================ 一週預報 =============================================
 
   getWeatherElement_week = () => {
     let dateTimeCnt = 0;
@@ -379,7 +378,11 @@ class RegionForecast {
     // Wx(天氣現象)
     for (const element of this.regionData_week[this.dist].weatherElement[6]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      console.log(element);
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
 
@@ -438,9 +441,14 @@ class RegionForecast {
     // MaxT(最高溫)
     for (const element of this.regionData_week[this.dist].weatherElement[12]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
 
       const WEEK_maxTemperature = document.querySelector(
         ".WEEK_max-temperature"
@@ -454,9 +462,14 @@ class RegionForecast {
     // MinT(最低溫)
     for (const element of this.regionData_week[this.dist].weatherElement[8]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
 
       const WEEK_minTemperature = document.querySelector(
         ".WEEK_min-temperature"
@@ -470,9 +483,14 @@ class RegionForecast {
     // PoP12(降雨機率)
     for (const element of this.regionData_week[this.dist].weatherElement[0]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
 
       const WEEK_rainProbabitlity = document.querySelector(
         ".WEEK_rain-probabitlity"
@@ -490,9 +508,14 @@ class RegionForecast {
     // MaxAT(體感最高溫)
     for (const element of this.regionData_week[this.dist].weatherElement[5]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
 
       const WEEK_maxApparentTemperature = document.querySelector(
         ".WEEK_max-apparent-temperature"
@@ -506,9 +529,15 @@ class RegionForecast {
     // MinAT(體感最低溫)
     for (const element of this.regionData_week[this.dist].weatherElement[11]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
+
       const WEEK_minApparentTemperature = document.querySelector(
         ".WEEK_min-apparent-temperature"
       );
@@ -521,9 +550,15 @@ class RegionForecast {
     // WS(蒲福風級)
     for (const element of this.regionData_week[this.dist].weatherElement[4]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
+
       const WEEK_BFWind = document.querySelector(".WEEK_BF-wind");
       const WEEK_BFWind_td = document.createElement("td");
       WEEK_BFWind_td.textContent = `${element.elementValue[1].value}`;
@@ -534,9 +569,15 @@ class RegionForecast {
     // RH(相對濕度)
     for (const element of this.regionData_week[this.dist].weatherElement[2]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
+
       const WEEK_relativeHumidity = document.querySelector(
         ".WEEK_relative-humidity"
       );
@@ -549,9 +590,15 @@ class RegionForecast {
     // WD(風向)
     for (const element of this.regionData_week[this.dist].weatherElement[13]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
+
       const WEEK_windDirection = document.querySelector(".WEEK_wind-direction");
       const WEEK_windDirection_td = document.createElement("td");
       WEEK_windDirection_td.textContent = `${element.elementValue[0].value}`;
@@ -562,9 +609,15 @@ class RegionForecast {
     // UVI(紫外線)
     for (const element of this.regionData_week[this.dist].weatherElement[9]
       .time) {
-      if (element.startTime.split(" ")[1].substring(0, 5) === "00:00") {
+      if (
+        element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
+        dateTimeCnt === 0
+      ) {
         continue;
       }
+
+      dateTimeCnt++;
+
       const WEEK_UVI = document.querySelector(".WEEK_UVI");
       const WEEK_UVI_td = document.createElement("td");
       WEEK_UVI_td.setAttribute("colspan", "2");
