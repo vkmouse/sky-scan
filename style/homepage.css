@@ -146,6 +146,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     margin-right: 5px;
+    text-decoration: none;
 }
 
 .week-weather-btn img {
@@ -171,14 +172,15 @@
 .bottom-right-title {
     display: flex;
     justify-content: space-around;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .bottom-right p {
     color: white;
     font-size: 20px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 5px;
+    box-sizing: border-box;
 }
 
 .progress-bar-container {
@@ -198,6 +200,32 @@
 select {
     margin-top: 10px;
     outline: none;
+    border-radius: 6px;
+    font-size: 15px;
 }
 
-option {}
+.location-option {
+    border-radius: 0px;
+    text-align: center;
+}
+
+.air-status-container {
+    display: flex;
+    align-items: center;
+}
+
+.face-status {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+
+
+.placeholder-image {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+
+}
