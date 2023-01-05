@@ -16,12 +16,14 @@ async function getEarthquake(callback){
             return
         }
         if(result.success){
+            console.log(result.records.Earthquake[0])
             callback(result.records.Earthquake[0].EarthquakeInfo)
         }
     }catch(err){
         console.log(err)
     }
 }
+getEarthquake()
 
 let map, infoWindow;
 
