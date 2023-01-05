@@ -87,8 +87,7 @@ const colspan2Time = ["00:00", "06:00", "12:00", "18:00"];
 
 const frcst3HR = document.querySelector("#forecast-3hr");
 const frcstWeek = document.querySelector("#forecast-week");
-const frcst24HR = document.querySelector("#forecast-24hr");
-const tabs = [frcst3HR, frcstWeek, frcst24HR];
+const tabs = [frcst3HR, frcstWeek];
 
 class RegionForecast {
   constructor(locationName) {
@@ -97,7 +96,6 @@ class RegionForecast {
     this.locationIds_week = locationIds_week[locationName];
     this.regionData_3hr;
     this.regionData_week;
-    this.regionData_24hr;
     this.dist = 0;
   }
 
@@ -149,7 +147,6 @@ class RegionForecast {
     // 一週
     this.getWeatherElement_week();
 
-    // 過去24小時
   };
 
   // ================================ 逐三小時預報 =============================================
@@ -618,10 +615,6 @@ class RegionForecast {
       WEEK_UVI.appendChild(WEEK_UVI_td);
     }
   };
-
-  // =============================================================================
-
-  getWeatherElement_24hr = () => {};
 
   // =============================================================================
 
