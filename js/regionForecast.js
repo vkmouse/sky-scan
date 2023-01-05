@@ -92,18 +92,12 @@ const tabs = [frcst3HR, frcstWeek, frcst24HR];
 
 class RegionForecast {
   constructor(locationName) {
-    const date = new Date();
-    this.today = date.toLocaleDateString();
-    this.nextDate = this.addDate(this.today, 1);
-    this.next2Date = this.addDate(this.today, 2);
-    this.day = new Date(this.today).getDay();
-    this.nextDay = new Date(this.nextDate).getDay();
-    this.next2Day = new Date(this.next2Date).getDay();
     this.locationName = locationName;
     this.locationIds_3hr = locationIds_3hr[locationName];
     this.locationIds_week = locationIds_week[locationName];
     this.regionData_3hr;
     this.regionData_week;
+    this.regionData_24hr;
     this.dist = 0;
   }
 
@@ -378,7 +372,6 @@ class RegionForecast {
     // Wx(天氣現象)
     for (const element of this.regionData_week[this.dist].weatherElement[6]
       .time) {
-      console.log(element);
       if (
         element.startTime.split(" ")[1].substring(0, 5) !== "06:00" &&
         dateTimeCnt === 0
