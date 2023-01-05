@@ -26,10 +26,10 @@
                     <div class="tabs">
                         <div id="forecast-3hr">逐3小時預報</div>
                         <div id="forecast-week">一週預報</div>
-                        <div id="forecast-24hr">過去過去24小時預報</div>
+                        <div id="forecast-24hr">過去24小時預報</div>
                     </div>
                     <div class="weather-content">
-                        <table>
+                        <table id="HR3_table" class="none">
                             <thead>
                                 <tr>
                                     <th>日期</th>
@@ -80,6 +80,121 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <table id="week_table" class="none">
+                            <thead>
+                                <tr class="WEEK_date">
+                                    <th>日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="WEEK_time">
+                                    <th>
+                                        時間
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_weather-status">
+                                    <th>
+                                        天氣狀況
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_max-temperature">
+                                    <th>
+                                        最高溫
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_min-temperature">
+                                    <th>
+                                        最低溫
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_rain-probabitlity">
+                                    <th>
+                                        降雨機率
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_max-apparent-temperature">
+                                    <th>
+                                        體感最高溫
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_min-apparent-temperature">
+                                    <th>
+                                        體感最低溫
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_relative-humidity">
+                                    <th>
+                                        相對濕度
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_BF-wind">
+                                    <th>
+                                        蒲福風級
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_wind-direction">
+                                    <th>
+                                        風向
+                                    </th>
+                                </tr>
+                                <tr class="WEEK_UVI">
+                                    <th>
+                                        紫外線
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table id="HR24_table" class="none">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        日期
+                                    </th>
+                                    <th id="first-date-container">
+                                        <span id="first-date"></span>
+                                        <br/>
+                                        <span id="first-weekday"></span>
+                                    </th>
+                                    <th colspan="8">
+                                        <span id="second-date"></span>
+                                        <br/>
+                                        <span id="second-weekday"></span>
+                                    </th>
+                                    <th colspan="8">
+                                        <span id="third-date"></span>
+                                        <br/>
+                                        <span id="third-weekday"></span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="HR3_time">
+                                    <th>
+                                        時間
+                                    </th>
+                                </tr>
+                                <tr class="HR3_weather-status">
+                                    <th>
+                                        溫度
+                                    </th>
+                                </tr>
+                                <tr class="HR3_temperature">
+                                    <th>
+                                        體感溫度
+                                    </th>
+                                </tr>
+                                <tr class="HR3_apparent-temperature">
+                                    <th>
+                                        時雨量
+                                    </th>
+                                </tr>
+                                <tr class="HR3_comfort">
+                                    <th>
+                                        相對濕度
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -88,7 +203,7 @@
             const config = {
                 API_KEY: "CWB-25142137-EFE4-4F9E-9B46-D41BF5BD73D5",
                 Authorization_Key:"CWB-E09A0AE9-71E8-4ABE-95D4-048AF8BCD5B1",
-                Aqi_Api_Key : "e8dd42e6-9b8b-43f8-991e-b3dee723a52d"
+                Aqi_Api_Key : "e8dd42e6-9b8b-43f8-991e-b3dee723a52d"            
             }
         </script>
     </body>

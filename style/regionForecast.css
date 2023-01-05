@@ -3,6 +3,10 @@ body {
   margin: 0;
 }
 
+.none {
+  display: none !important;
+}
+
 /* outlayer */
 .region-container {
   display: flex;
@@ -124,5 +128,26 @@ img {
 .HR3_rain-probabitlity td,
 .HR3_BF-wind td,
 .HR3_wind-direction td {
+  background-color: rgb(251, 251, 233);
+}
+
+/* WEEK-table */
+.WEEK_date td {
+  background-color: rgb(25, 150, 161);
+  color: white;
+  font-weight: 700;
+}
+
+.WEEK_time td {
+  color: #489;
+  font-weight: 700;
+}
+
+.WEEK_time td,
+.WEEK_max-temperature td,
+.WEEK_rain-probabitlity td,
+.WEEK_min-apparent-temperature td,
+.WEEK_BF-wind td,
+.WEEK_wind-direction td {
   background-color: rgb(251, 251, 233);
 }
