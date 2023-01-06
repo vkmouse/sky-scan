@@ -130,6 +130,10 @@
 
 }
 
+.town-info-btn:hover {
+    transform: scale(1.01);
+}
+
 .town-info-btn img {
     width: 30px;
 }
@@ -152,6 +156,10 @@
 .week-weather-btn img {
     width: 30px;
 
+}
+
+.week-weather-btn:hover {
+    transform: scale(1.01);
 }
 
 .bottom-content {
@@ -196,6 +204,10 @@
     width: 0%;
     height: 100%;
     background-color: rgb(60, 255, 1);
+}
+
+.progress-bar-num {
+    margin-top: 5px;
 }
 
 select {
