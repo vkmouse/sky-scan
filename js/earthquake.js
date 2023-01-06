@@ -16,12 +16,41 @@ async function getEarthquake(callback){
             return
         }
         if(result.success){
-            callback(result.records.Earthquake[0].EarthquakeInfo)
+            console.log(result.records.Earthquake[0])
+            callback(result.records.Earthquake[0])
         }
     }catch(err){
         console.log(err)
     }
 }
+getEarthquake((data)=>{
+    const dataList = data.Intensity.ShakingArea
+    const cardList = document.querySelector(".cardList")
+    const ReportContent = document.querySelector(".ReportContent")
+    ReportContent.innerHTML = `
+        <h1><span class='badge bg-danger'>各縣市速報</span></h1>
+            <div class="alert alert-danger" role="alert" style="width: auto;">
+            ${data.ReportContent}
+              </div>
+    `
+    let firstChild = ""
+    dataList.forEach((val) => {
+        firstChild +=`
+            <div class="row">
+                <div class="card" style="width: 100%;margin:0px;">
+                    <div class="card-body">
+                        <h5 class="card-title">${val.AreaDesc}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${val.AreaIntensity}</h6>
+                        <h4 class="card-subtitle mb-2 text-muted">${val.CountyName}</h6>
+                        
+                    </div>
+                </div>
+            </div>
+        `
+    });
+    cardList.innerHTML = firstChild;
+    
+})
 
 let map, infoWindow;
 
@@ -54,7 +83,8 @@ function initMap() {
             infoWindow.setPosition(pos);
             infoWindow.setContent("你的位置");
             infoWindow.open(map);
-            getEarthquake((EarthquakeInfo)=>{
+            getEarthquake((data)=>{
+                var EarthquakeInfo = data.EarthquakeInfo
                 const pos = {
                     lat: EarthquakeInfo.Epicenter.EpicenterLatitude,
                     lng: EarthquakeInfo.Epicenter.EpicenterLongitude,
