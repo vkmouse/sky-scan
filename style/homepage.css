@@ -55,6 +55,7 @@
     background-position: center;
     background-size: cover;
     justify-content: center;
+    height: 100vh;
 }
 
 .left-content {
@@ -130,6 +131,10 @@
 
 }
 
+.town-info-btn:hover {
+    transform: scale(1.01);
+}
+
 .town-info-btn img {
     width: 30px;
 }
@@ -146,11 +151,16 @@
     justify-content: space-between;
     box-sizing: border-box;
     margin-right: 5px;
+    text-decoration: none;
 }
 
 .week-weather-btn img {
     width: 30px;
 
+}
+
+.week-weather-btn:hover {
+    transform: scale(1.01);
 }
 
 .bottom-content {
@@ -188,12 +198,17 @@
     height: 20px;
     margin: auto;
     border: 2px solid black;
+    margin-top: 10px;
 }
 
 .progress-bar {
     width: 0%;
     height: 100%;
     background-color: rgb(60, 255, 1);
+}
+
+.progress-bar-num {
+    margin-top: 5px;
 }
 
 select {
@@ -216,8 +231,10 @@ select {
 .face-status {
     width: 30px;
     height: 30px;
-    margin-left: 10px;
-    margin-top: 5px;
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+
 }
 
 

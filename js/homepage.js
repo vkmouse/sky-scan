@@ -1,5 +1,6 @@
 import TaiwanMap from "./taiwan_map.js";
 import { setup as setupColorizer } from "./colorizer.js";
+import { showWeekForecast } from "./forecast.js";
 
 
 const root = document.getElementsByClassName("root")[0];
@@ -16,6 +17,7 @@ const locationSelection = document.querySelector(".location-selection");
 const regionForecast = document.querySelector("#regionForecast");
 const airStatusImage = document.querySelector(".face-status");
 const placeholderImage = document.querySelector(".placeholder-image");
+const weekWeather = document.querySelector('.week-weather-btn');
 
 let locationArr = null;
 let prevClickedLocation, newOption, aqiRecords, aqiNumber, initLocation, index;
@@ -154,8 +156,7 @@ twMap.onclick = (twMap, location) => {
 
 regionForecast.onclick = () => {
     const location = document.querySelector(".location").textContent;
-    window.location =
-      window.location.href.split("/")[0] + `/regionForecast.html?locationName=${location}`;
+    window.location = `${window.location.href}/regionForecast.html?locationName=${location}`;
 };
 
 locationSelection.addEventListener("change", (e) => {
@@ -165,6 +166,11 @@ locationSelection.addEventListener("change", (e) => {
     }
 })
 
+weekWeather.onclick = () => {
+    const location = document.querySelector(".location").textContent;
+    showWeekForecast(location);
+    console.log(location)
+}
 
 function determineWeatherImage(object, image) {
     if (object.innerHTML === "晴天") {
