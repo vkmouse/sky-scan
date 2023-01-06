@@ -12,7 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px;
+  padding: 20px;
 }
 
 .region-content {

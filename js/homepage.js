@@ -156,8 +156,7 @@ twMap.onclick = (twMap, location) => {
 
 regionForecast.onclick = () => {
     const location = document.querySelector(".location").textContent;
-    window.location =
-      window.location.href.split("/")[0] + `/sky-scan/regionForecast.html?locationName=${location}`;
+    window.location = `${window.location.origin}/regionForecast.html?locationName=${location}`;
 };
 
 locationSelection.addEventListener("change", (e) => {
