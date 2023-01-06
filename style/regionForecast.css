@@ -3,6 +3,10 @@ body {
   margin: 0;
 }
 
+.none {
+  display: none !important;
+}
+
 /* outlayer */
 .region-container {
   display: flex;
@@ -15,7 +19,7 @@ body {
   display: grid;
   grid-template-columns: 300px auto;
   justify-items: center;
-  gap: 20px;
+  gap: 90px;
 }
 
 /* banner */
@@ -23,7 +27,7 @@ body {
   position: relative;
   min-width: 100vw;
   min-height: 300px;
-  background-image: url(/images/background.jpg);
+  background-image: url(/sky-scan/images/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -59,7 +63,7 @@ select {
 .tabs {
   width: 786px;
   display: grid;
-  grid-template-columns: repeat(3, 262px);
+  grid-template-columns: repeat(2, 262px);
   justify-content: center;
   margin: 60px 0;
 }
@@ -77,7 +81,7 @@ select {
   border-radius: 5px 0 0 5px;
 }
 
-.tabs div:nth-child(3) {
+.tabs div:nth-child(2) {
   border-radius: 0 5px 5px 0;
 }
 
@@ -102,6 +106,7 @@ thead th {
 
 tbody th {
   color: rgb(16, 113, 122);
+  padding: 0 10px;
 }
 
 th,
@@ -124,5 +129,26 @@ img {
 .HR3_rain-probabitlity td,
 .HR3_BF-wind td,
 .HR3_wind-direction td {
+  background-color: rgb(251, 251, 233);
+}
+
+/* WEEK-table */
+.WEEK_date td {
+  background-color: rgb(25, 150, 161);
+  color: white;
+  font-weight: 700;
+}
+
+.WEEK_time td {
+  color: #489;
+  font-weight: 700;
+}
+
+.WEEK_time td,
+.WEEK_max-temperature td,
+.WEEK_rain-probabitlity td,
+.WEEK_min-apparent-temperature td,
+.WEEK_BF-wind td,
+.WEEK_wind-direction td {
   background-color: rgb(251, 251, 233);
 }
