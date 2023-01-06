@@ -63,6 +63,7 @@ const weatherImgSrc = {
   陰短暫雨: "./images/overcast-rainy.svg",
   多雲短暫雨: "./images/cloudy-rainy.svg",
   多雲時陰短暫雨: "./images/cloudy-overcast-rainy.svg",
+  陰時多雲短暫雨: "./images/cloudy-overcast-rainy.svg",
   晴: "./images/sunny.png",
   多雲: "./images/cloudy.png",
   晴時多雲: "./images/sunny-cloudy.svg",
