@@ -1,18 +1,21 @@
 .weather-week-forecast {
-    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
     top: 0px;
     left: 0px;
 
     z-index: 10;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100vh;
     visibility: hidden;
 }
 #week-forecast {
-    margin: 0px auto;
-    width: 800px;
+    width: 1200px;
     border-collapse: collapse;
+    border: 2px solid white;
 }
 
 td + td,
@@ -20,21 +23,24 @@ th + th { border-left: 2px solid white; }
 tr + tr { border-top: 2px solid white; }
 
 #week-forecast > thead {
-    width: 200px;
-    background-color: #04AA6D;
-    font-size: 16px;
+    background-color: #1A67B1;
+    font-size: 24px;
     color: white;
     text-align: center;
 }
 
+#week-forecast > thead > tr > th > #text {
+    margin: 5px;
+}
+
 #week-forecast > thead > tr > th > p {
-    margin: auto;
+    margin: 5px;
 }
 
 #week-forecast .content > th {
-    background-color: #E5EEDD;
+    background-color: #BBD1EA;
     padding: 15px;
-    font-size: 16px;
+    font-size: 24px;
 }
 
 #week-forecast-close {

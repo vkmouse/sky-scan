@@ -35,6 +35,9 @@ function showWeekForecast(locationName) {
         let div = document.getElementsByClassName('weather-week-forecast')[0];
         div.innerHTML = '';
         div.style.visibility = "visible";
+        div.addEventListener('click', function(event) {
+            div.style.visibility = "hidden";
+        });
         
         let headerData = [];
         let uviData = ['紫外線'];
@@ -84,20 +87,6 @@ function showWeekForecast(locationName) {
             }
         }
 
-        // Add close btn
-        let closeDiv = document.createElement('div');
-        closeDiv.setAttribute('id', 'week-forecast-close');
-        let span = document.createElement('span');
-        span.innerText = 'X';
-
-        span.addEventListener('click', function(event) {
-            document.getElementsByClassName('weather-week-forecast')[0].style.visibility = "hidden";
-            
-        });
-
-        closeDiv.appendChild(span);
-        div.appendChild(closeDiv);
-
         let table = document.createElement('table');
         table.setAttribute("id", "week-forecast");
 
@@ -109,10 +98,7 @@ function showWeekForecast(locationName) {
         tr.appendChild(th);
         for (let i = 0; i < headerData.length; i++) {
             let th = document.createElement('th');
-            th.innerText = headerData[i]['date'];
-            let p = document.createElement('p');
-            p.innerText = headerData[i]['day'];
-            th.appendChild(p);
+            th.innerHTML = `<p>${headerData[i]['date']}</p><p>${headerData[i]['day']}</p>`
             tr.appendChild(th);
         }
         thead.appendChild(tr);
