@@ -4,6 +4,14 @@
 - ppt: https://docs.google.com/presentation/d/1GvCpm_Kpvu7S2bqwe_DG7Eu6pYvC88huemiFLNwEFC0/edit?usp=sharing  
 - live demo: https://vkmouse.github.io/sky-scan/  
 
+### 分工方式
+
+1. 氣象首頁
+2. 鄉鎮總覽
+3. 一週預報
+4. 地震資訊
+5. 地圖操作介面
+
 ### 開發心得
 
 1. 鄉鎮 API 內容複雜，且資料筆數不固定，造成 UI 呈現複雜
